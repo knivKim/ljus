@@ -108,16 +108,16 @@ blaa = (11469, 3277)
 rosa = (32768, 15729)
 limeGron = (29491, 30802)
 varmKvit = (32977, 27105)
-blaakvit = (25022, 24884)
+blaaKvit = (25022, 24884)
 
-listeAvFarger = [gron, rod, blaa, rosa, limeGron, varmKvit]
+listeAvFarger = [gron, rod, blaa, rosa, limeGron, varmKvit,blaaKvit]
 
 lightOrder = [0,1,2] #Skriv in ljusa i rekkefølge frå badet til kjøkenet, denne vert nytta til posisjonsavhengige iterasjonsalgoritmer
 
 def blink_on_off(sleepTime=0.2,wakeTime=0.5,rand_colour = False):
     #blinker alle lysene på også av samtidig. 
     if not rand_colour: 
-        colour = blaakvit
+        colour = blaaKvit
         for i in range(0,len(lights)):
             api(lights[i].light_control.set_xy_color(colour[0],colour[1]))
     
