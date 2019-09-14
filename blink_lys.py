@@ -120,7 +120,7 @@ def blink_on_off(sleepTime=0.2,wakeTime=0.5,rand_colour = False):
         colour = blaaKvit
         for i in range(0,len(lights)):
             api(lights[i].light_control.set_xy_color(colour[0],colour[1]))
-    
+    '''
     for i in range(0,len(lights)):
         if rand_colour: 
             colour = (random.randint(9,60000),random.randint(9,60000))
@@ -130,6 +130,11 @@ def blink_on_off(sleepTime=0.2,wakeTime=0.5,rand_colour = False):
     
     for i in range(0,len(lights)):
         api(lights[i].light_control.set_dimmer(0))
+    time.sleep(sleepTime)
+    '''
+    api(lights.light_control.set_dimmer(0)
+    time.sleep(sleepTime)
+    api(lights.light_control.set_dimmer(100)
     time.sleep(sleepTime)
 
 def chaotic_blink():
