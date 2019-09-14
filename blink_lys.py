@@ -121,6 +121,7 @@ def chaotic_blink():
         if brightness < 21:
             brightness = 0
         api(lights[i].light_control.set_dimmer(brightness))
+
 def predetermined():
     colour = listeAvFarger[random.randint(0,len(listeAvFarger)-1)]
     api(lights[0].light_control.set_xy_color(colour[0],colour[1]))
@@ -132,7 +133,6 @@ def predetermined():
     api(lights[2].light_control.set_dimmer(random.randint(0,100)))
     time.sleep(1)
 
-
 def synch_brightness(sleepTime=0.3):
     #Skifter farger kvart tidsintervall til individuelle farger
     #ljusa deler ljusstyrke
@@ -143,6 +143,19 @@ def synch_brightness(sleepTime=0.3):
         api(lights[i].light_control.set_xy_color(random.randint(9,60000),random.randint(9,60000)))
         api(lights[i].light_control.set_dimmer(brightness))
     time.sleep(sleepTime)
+
+def synch_all(sleepTime=0.5):
+    #Skifter farger kvart tidsintervall til individuelle farger
+    #ljusa deler ljusstyrke
+    brightness = random.randint(0,100)
+    colour = (random.randint(9,60000),random.randint(9,60000))
+    if brightness < 21:
+        brightness = 0
+    for i in range(0,len(lights)):
+        api(lights[i].light_control.set_xy_color(colour[0],colour[1]))
+        api(lights[i].light_control.set_dimmer(brightness))
+    time.sleep(sleepTime)
+
 
 def light_train(speed, minBrightness, maxBrightness, orderOfLights):
     #speed er eit mål på hastigheita til lysskiftinga
@@ -160,7 +173,8 @@ def light_train(speed, minBrightness, maxBrightness, orderOfLights):
             time.sleep(speed)
 
 while 1:
-    synch_brightness(0.3)
+    #synch_brightness(0.3)
+    synch_all()
     #light_train(0.2,0,100, lightOrder)
     #chaotic_blink()
 
