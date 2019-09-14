@@ -108,12 +108,32 @@ blaa = (11469, 3277)
 rosa = (32768, 15729)
 limeGron = (29491, 30802)
 varmKvit = (32977, 27105)
+blaakvit = (25022, 24884)
 
 listeAvFarger = [gron, rod, blaa, rosa, limeGron, varmKvit]
 
 lightOrder = [0,1,2] #Skriv in ljusa i rekkefølge frå badet til kjøkenet, denne vert nytta til posisjonsavhengige iterasjonsalgoritmer
 
+def blink_on_off(sleepTime=0.2,wakeTime=0.5,rand_colour = False):
+    #blinker alle lysene på også av samtidig. 
+    if not rand_colour: 
+        colour = blaakvit
+        for i in range(0,len(lights)):
+            api(lights[i].light_control.set_xy_color(colour[0],colour[1]))
+    
+    for i in range(0,len(lights)):
+        if rand_colour: 
+            colour = (random.randint(9,60000),random.randint(9,60000))
+            api(lights[i].light_control.set_xy_color(colour[0],colour[1]))
+        api(lights[i].light_control.set_dimmer(100))
+    time.sleep(wakeTime)
+    
+    for i in range(0,len(lights)):
+        api(lights[i].light_control.set_dimmer(0))
+    time.sleep(sleepTime)
+
 def chaotic_blink():
+    #tilfeldig farge og tilfeldig brightness
     for i in range(0,len(lights)):
         api(lights[i].light_control.set_xy_color(random.randint(9,60000),random.randint(9,60000)))
         brightness = random.randint(0,100)
@@ -123,6 +143,7 @@ def chaotic_blink():
         api(lights[i].light_control.set_dimmer(brightness))
 
 def predetermined():
+    #FOrhandsbestemte farger og brightness for enkelte lys
     colour = listeAvFarger[random.randint(0,len(listeAvFarger)-1)]
     api(lights[0].light_control.set_xy_color(colour[0],colour[1]))
     api(lights[0].light_control.set_dimmer(random.randint(0,100)))
@@ -173,8 +194,9 @@ def light_train(speed, minBrightness, maxBrightness, orderOfLights):
             time.sleep(speed)
 
 while 1:
+    blink_on_off()
     #synch_brightness(0.3)
-    synch_all()
+    #synch_all()
     #light_train(0.2,0,100, lightOrder)
     #chaotic_blink()
 
