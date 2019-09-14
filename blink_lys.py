@@ -132,9 +132,9 @@ def blink_on_off(sleepTime=0.2,wakeTime=0.5,rand_colour = False):
         api(lights[i].light_control.set_dimmer(0))
     time.sleep(sleepTime)
     '''
-    api(lights.light_control.set_dimmer(0)
+    api(lights.light_control.set_dimmer(0))
     time.sleep(sleepTime)
-    api(lights.light_control.set_dimmer(100)
+    api(lights.light_control.set_dimmer(100))
     time.sleep(sleepTime)
 
 def chaotic_blink():
